@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Bash options.
+# https://www.gnu.org/software/bash/manual/bashref.html#The-Shopt-Builtin
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Enable `vi` editing mode.
+# https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Readline-vi-Mode
+
+set -o vi
+# change "^A" to the beginning of the line
+# https://unix.stackexchange.com/questions/7426/jump-to-start-of-the-line-in-bashs-vi-mode
+# All the bash shortcuts https://ss64.com/bash/syntax-keyboard.html
+# https://github.com/junegunn/fzf/issues/1414
+# bind -x '"\C-a": "beginning-of-line"'
+# https://stackoverflow.com/a/48440305
+# bindkey "^A" vi-beginning-of-line
+# bindkey "^E" vi-end-of-line
+
+bind '\C-a:beginning-of-line'
+bind '\C-e:end-of-line'
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Automatically prepend `cd` to directory names.
+
+shopt -s autocd
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Autocorrect typos in path names when using the `cd` command.
+
+shopt -s cdspell
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Check the window size after each command and, if necessary, update
+# the values of `LINES` and `COLUMNS`.
+
+shopt -s checkwinsize
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Save all lines of a multiple-line command in the same history entry.
+
+shopt -s cmdhist
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Include filenames beginning with a "." in the filename expansion.
+
+shopt -s dotglob
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Use extended pattern matching features.
+
+shopt -s extglob
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Append to the history file rather then overwriting it.
+
+shopt -s histappend
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Do not attempt to search the PATH for possible completions when
+# completion is attempted on an empty line.
+
+shopt -s no_empty_cmd_completion
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Match filenames in a case-insensitive fashion when performing
+# filename expansion.
+
+shopt -s nocaseglob
