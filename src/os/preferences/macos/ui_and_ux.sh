@@ -69,15 +69,17 @@ execute "defaults write -g QLPanelAnimationDuration -float 0" \
 execute "defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false" \
     "Disable resume system-wide"
 
-# Ask for computer name
-ask "Please provide a computer name (small case with underscores): "
-computer_name="$(get_answer)"
-
-execute "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string '$computer_name' && \
-         sudo scutil --set ComputerName '$computer_name' && \
-         sudo scutil --set HostName '$computer_name' && \
-         sudo scutil --set LocalHostName '$computer_name'" \
-    "Set computer name"
+ask_for_confirmation "Do you want to set computer name?"
+if answer_is_yes; then
+    # Ask for computer name
+    ask "Please provide a computer name (small case with underscores): "
+    computer_name="$(get_answer)"
+    execute "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string '$computer_name' && \
+            sudo scutil --set ComputerName '$computer_name' && \
+            sudo scutil --set HostName '$computer_name' && \
+            sudo scutil --set LocalHostName '$computer_name'" \
+        "Set computer name"
+fi
 
 execute "sudo systemsetup -setrestartfreeze on" \
     "Restart automatically if the computer freezes"
